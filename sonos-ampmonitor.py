@@ -116,6 +116,8 @@ if len(sys.argv) == 2:
 else:
     connect_uid = None
 
+connect_uid = "RINCON_B8E937F9A01401400"
+
 print u"Discovering Sonos zones".encode('utf-8')
 
 match_ips   = []
