@@ -69,8 +69,6 @@ if len(sys.argv) == 2:
 else:
     connect_uid = None
 
-connect_uid = "RINCON_B8E937F9A01401400"
-
 print u"Discovering Sonos zones".encode('utf-8')
 
 match_ips   = []
@@ -84,7 +82,7 @@ for zone in soco.discover():
         # we recognize Sonos Connect and ZP90 by their hardware revision number
         print zone.get_speaker_info().get('hardware_version')
         print
-        if zone.get_speaker_info().get('hardware_version')[:4] == '1.1.':
+        if zone.get_speaker_info().get('hardware_version')[:4] == '1.17':
             match_ips.append(zone.ip_address)
             print u"   => possible match".encode('utf-8')
 print
