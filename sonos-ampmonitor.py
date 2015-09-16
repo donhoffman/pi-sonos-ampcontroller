@@ -36,6 +36,7 @@ import telnetlib
 import soco
 import Queue
 import signal
+import lircp
 from datetime import datetime
 
 __version__     = '0.3'
