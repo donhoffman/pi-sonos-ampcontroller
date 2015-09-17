@@ -168,6 +168,7 @@ while True:
                 
         if start_time > 0:
             elapsed = time.time() - start_time
+            print "elapsed =", elapsed
             if elapsed > OFF_WAIT_TIME:
                 if device_on:
                     send_off()
