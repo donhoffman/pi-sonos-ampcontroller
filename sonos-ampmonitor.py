@@ -156,7 +156,8 @@ while True:
             print u"{} SONOS play status: {}".format(datetime.now(), status).encode('utf-8')
             if status == 'PLAYING':
                 send_on()
-            elif device_on:
+                device_on = True
+            elif status == 'PAUSED_PLAYBACK" and device_on:
                 print u"Starting wait timer.".encode('utf-8')
 
         last_status = status
