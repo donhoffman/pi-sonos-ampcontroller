@@ -157,7 +157,7 @@ while True:
 
         if last_status != status:
             print u"{} SONOS play status: {}".format(datetime.now(), status).encode('utf-8')
-            if status == 'PLAYING':
+            if status == 'PLAYING' or status == 'STOPPED':
                 if not device_on:
                     send_on()
                     device_on = True
