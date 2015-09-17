@@ -177,6 +177,7 @@ while True:
 
         last_status = status
     except Queue.Empty:
+        print "elapsed = ", elapsed
         pass
     except KeyboardInterrupt:
         handle_sigterm()
