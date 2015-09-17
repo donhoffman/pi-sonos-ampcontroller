@@ -43,12 +43,19 @@ __version__     = '0.3'
 
 
 # --- Please adapt these settings ---------------------------------------------
-#TBD
+OFF_WAIT_TIME = 60 * 50
+IR_DEVICE = "onkyo"
+IR_OFF_COMMAND = 'power'
+IR_ON_COMMAND = 'power'
 
 
 
 # basic in/out with the receiver
-#TBD
+def send_off():
+    print u"Sending IR OFF.".encode('utf-8')
+
+def send_on():
+    print u"Sending IR ON.".encode('utf-8')
 
 def auto_flush_stdout():
     unbuffered = os.fdopen(sys.stdout.fileno(), 'w', 0)
@@ -97,6 +104,8 @@ sonos_device    = soco.SoCo(match_ips[0])
 subscription    = None
 renewal_time    = 120
 
+wait_countdown = 0
+
 
 # --- Main loop ---------------------------------------------------------------
 
@@ -105,6 +114,7 @@ last_status     = None
 
 # catch SIGTERM gracefully
 signal.signal(signal.SIGTERM, handle_sigterm)
+
 # non-buffered STDOUT so we can use it for logging
 auto_flush_stdout()
 
@@ -144,9 +154,11 @@ while True:
 
         if last_status != status:
             print u"{} SONOS play status: {}".format(datetime.now(), status).encode('utf-8')
-
-        if last_status != 'PLAYING' and status == 'PLAYING':
-            pass
+            if status == 'PLAYING':
+                send_on()
+            else:
+                print u"Starting wait timer.".encode('utf-8')
+                pass
 
         last_status = status
     except Queue.Empty:
