@@ -148,7 +148,7 @@ while True:
             continue
 
     try:
-        event   = subscription.events.get(timeout=10)
+        event   = subscription.events.get(timeout=0.5)
         status  = event.variables.get('transport_state')
 
         if not status:
