@@ -166,7 +166,9 @@ while True:
                 print u"Starting wait timer.".encode('utf-8')
                 start_time = time.time()
                 print "start_time =", start_time
-                
+
+        last_status = status
+    except Queue.Empty:
         if start_time > 0:
             elapsed = time.time() - start_time
             print "elapsed =", elapsed
@@ -175,11 +177,6 @@ while True:
                     send_off()
                     device_on = False
                 start_time = 0
-
-        last_status = status
-    except Queue.Empty:
-        print "elapsed = ", elapsed
-        pass
     except KeyboardInterrupt:
         handle_sigterm()
 
