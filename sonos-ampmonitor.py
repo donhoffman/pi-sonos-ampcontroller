@@ -43,7 +43,7 @@ __version__     = '0.3'
 
 
 # --- Please adapt these settings ---------------------------------------------
-OFF_WAIT_TIME = 60 * 50
+OFF_WAIT_TIME = 30
 IR_DEVICE = "onkyo"
 IR_OFF_COMMAND = 'power'
 IR_ON_COMMAND = 'power'
@@ -104,13 +104,15 @@ sonos_device    = soco.SoCo(match_ips[0])
 subscription    = None
 renewal_time    = 120
 
-device_on = False
+
 
 
 # --- Main loop ---------------------------------------------------------------
 
 break_loop      = False
 last_status     = None
+start_time      = 0
+device_on       = False
 
 # catch SIGTERM gracefully
 signal.signal(signal.SIGTERM, handle_sigterm)
@@ -155,10 +157,21 @@ while True:
         if last_status != status:
             print u"{} SONOS play status: {}".format(datetime.now(), status).encode('utf-8')
             if status == 'PLAYING':
-                send_on()
-                device_on = True
+                if not device_on:
+                    send_on()
+                    device_on = True
+                start_time = 0
             elif status == 'PAUSED_PLAYBACK' and device_on:
                 print u"Starting wait timer.".encode('utf-8')
+                start_time = time.time()
+                
+        if start_time > 0:
+            elapsed = time.time() - start_time
+            if elapsed > OFF_WAIT_TIME:
+                if device_on:
+                    send_off()
+                    device_on = False
+                start_time = 0
 
         last_status = status
     except Queue.Empty:
