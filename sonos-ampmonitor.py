@@ -157,7 +157,7 @@ while True:
             if status == 'PLAYING':
                 send_on()
                 device_on = True
-            elif status == 'PAUSED_PLAYBACK" and device_on:
+            elif status == 'PAUSED_PLAYBACK' and device_on:
                 print u"Starting wait timer.".encode('utf-8')
 
         last_status = status
