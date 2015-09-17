@@ -164,6 +164,7 @@ while True:
             elif status == 'PAUSED_PLAYBACK' and device_on:
                 print u"Starting wait timer.".encode('utf-8')
                 start_time = time.time()
+                print "start_time =", start_time
                 
         if start_time > 0:
             elapsed = time.time() - start_time
