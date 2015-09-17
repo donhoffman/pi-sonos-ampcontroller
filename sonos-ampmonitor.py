@@ -44,7 +44,7 @@ __version__     = '0.3'
 
 
 # --- Please adapt these settings ---------------------------------------------
-OFF_WAIT_TIME = 30
+OFF_WAIT_TIME = 60 * 5
 IR_DEVICE = "onkyo"
 IR_OFF_COMMAND = 'power'
 IR_ON_COMMAND = 'power'
