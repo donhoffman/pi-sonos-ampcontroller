@@ -112,6 +112,7 @@ renewal_time    = 120
 break_loop      = False
 last_status     = None
 start_time      = 0
+elapsed         = 0
 device_on       = False
 
 # catch SIGTERM gracefully
