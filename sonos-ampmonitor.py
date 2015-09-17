@@ -149,7 +149,7 @@ while True:
             continue
 
     try:
-        event   = subscription.events.get(timeout=5)
+        event   = subscription.events.get(timeout=10)
         status  = event.variables.get('transport_state')
 
         if not status:
