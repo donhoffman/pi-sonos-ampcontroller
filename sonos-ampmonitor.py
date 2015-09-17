@@ -185,6 +185,9 @@ while True:
         handle_sigterm()
 
     if break_loop:
+        if device_on:
+            send_off()
+            device_on = False
         subscription.unsubscribe()
         soco.events.event_listener.stop()
         break
