@@ -170,7 +170,6 @@ while True:
                 start_time = 0
             elif (status == 'PAUSED_PLAYBACK' or status == 'STOPPED') and device_on:
                 print u"{} Starting wait timer.".format(datetime.now()).encode('utf-8')
-                print u"Starting wait timer.".encode('utf-8')
                 start_time = time.time()
 
         last_status = status
