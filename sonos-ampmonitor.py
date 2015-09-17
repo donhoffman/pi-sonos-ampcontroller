@@ -37,6 +37,7 @@ import soco
 import Queue
 import signal
 from datetime import datetime
+from subprocess import call
 
 __version__     = '0.3'
 
@@ -51,11 +52,16 @@ IR_ON_COMMAND = 'power'
 
 
 # basic in/out with the receiver
+def send_once(device_id, command):
+    call(['irsend', 'SEND_ONCE', device_id, command])
+    
 def send_off():
     print u"Sending IR OFF.".encode('utf-8')
+    send_once(IR_DEVICE, IR_OFF_COMMAND)
 
 def send_on():
     print u"Sending IR ON.".encode('utf-8')
+    send_once(IR_DEVICE, IR_ON_COMMAND)
 
 def auto_flush_stdout():
     unbuffered = os.fdopen(sys.stdout.fileno(), 'w', 0)
