@@ -104,7 +104,7 @@ sonos_device    = soco.SoCo(match_ips[0])
 subscription    = None
 renewal_time    = 120
 
-wait_countdown = 0
+device_on = False
 
 
 # --- Main loop ---------------------------------------------------------------
@@ -156,9 +156,8 @@ while True:
             print u"{} SONOS play status: {}".format(datetime.now(), status).encode('utf-8')
             if status == 'PLAYING':
                 send_on()
-            else:
+            elseif device_on:
                 print u"Starting wait timer.".encode('utf-8')
-                pass
 
         last_status = status
     except Queue.Empty:
