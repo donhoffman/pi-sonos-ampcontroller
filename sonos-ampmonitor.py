@@ -56,11 +56,11 @@ def send_once(device_id, command):
     call(['irsend', 'SEND_ONCE', device_id, command])
     
 def send_off():
-    print u"Sending IR OFF.".encode('utf-8')
+    print u"{} Sending IR Off.".format(datetime.now()).encode('utf-8')
     send_once(IR_DEVICE, IR_OFF_COMMAND)
 
 def send_on():
-    print u"Sending IR ON.".encode('utf-8')
+    print u"{} Sending IR On.".format(datetime.now()).encode('utf-8')
     send_once(IR_DEVICE, IR_ON_COMMAND)
 
 def auto_flush_stdout():
@@ -171,13 +171,11 @@ while True:
             elif (status == 'PAUSED_PLAYBACK' or status == 'STOPPED') and device_on:
                 print u"Starting wait timer.".encode('utf-8')
                 start_time = time.time()
-                print "start_time =", start_time
 
         last_status = status
     except Queue.Empty:
         if start_time > 0:
             elapsed = time.time() - start_time
-            print "elapsed =", elapsed
             if elapsed > OFF_WAIT_TIME:
                 if device_on:
                     send_off()
