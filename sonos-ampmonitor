@@ -3,16 +3,26 @@
 # adjust the variables section below
 #
 # then: place this in /etc/init.d
-# then: chmod +x /etc/init.d/sonos-monitor
-# then: update-rc.d sonos-monitor defaults
+# then: chmod +x /etc/init.d/sonos-ampmonitor
+# then: update-rc.d sonos-ampmonitor defaults
 #
 # start daemon with /etc/init.d/sonos-monitor start
 # stop it with /etc/init.d/sonos-monitor stop
 
+### BEGIN INIT INFO
+# Provides:          sonos-ampmonitor
+# Required-Start:    lirc $network
+# Required-Stop:     lirc $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start sonos-ampmonitor daemon
+# Description:       Enable sonos-ampmonitor service.
+### END INIT INFO
+
 DAEMON=/usr/bin/python
-ARGS=home/pi/sonos/sonos-monitor.py
-LOG=/home/pi/sonos/sonos-monitor.log
-PIDFILE=/var/run/sonos-monitor.pid
+ARGS=/usr/local/bin/sonos-ampmonitor.py
+LOG=/var/log/sonos-ampmonitor.log
+PIDFILE=/var/run/sonos-ampmonitor.pid
 USER=pi
 GROUP=pi
 
